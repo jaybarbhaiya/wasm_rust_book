@@ -59,4 +59,43 @@
             (local.get $piece)
         )
     )
+
+    ;; Gets a piece from the board. Out of range causes a trap
+    (func $getPiece (param $x i32) (param $y i32) (result i32)
+        (if (result i32)
+            (block (result i32)
+                (i32.add
+                    (call $inRange
+                        (i32.const 0)
+                        (i32.const 7)
+                        (local.get $x)
+                    )
+                    (call $inRange
+                        (i32.const 0)
+                        (i32.const 7)
+                        (local.get $y)
+                    )
+                )
+            )
+            (then
+                (i32.load
+                    (call $offsetForPosition
+                        (local.get $x)
+                        (local.get $y)
+                    )
+                )
+            )
+            (else
+                (unreachable)
+            )
+        )
+    )
+
+    ;; Detect if values are within range (inclusive high and low)
+    (func $inRange (param $low i32) (param $high i32) (param $value i32) (result i32)
+        (i32.and
+            (i32.ge_s (local.get $value) (local.get $low))
+            (i32.le_s (local.get $value) (local.get $high))
+        )
+    )
 )
