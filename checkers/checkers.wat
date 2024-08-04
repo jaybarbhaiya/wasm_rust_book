@@ -48,4 +48,15 @@
     (func $withoutCrown (param $piece i32) (result i32)
         (i32.and (local.get $piece) (i32.const 3))
     )
+
+    ;; Sets a peice on the board
+    (func $setPeice (param $x i32) (param $y i32) (param $piece i32)
+        (i32.store
+            (call $offsetForPosition
+                (local.get $x)
+                (local.get $y)
+            )
+            (local.get $piece)
+        )
+    )
 )
