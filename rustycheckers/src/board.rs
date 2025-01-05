@@ -18,7 +18,7 @@ impl GamePiece {
         }
     }
 
-    pub fn crowed(p: GamePiece) -> GamePiece {
+    pub fn crowned(p: GamePiece) -> GamePiece {
         GamePiece {
             color: p.color,
             crowed: true,
@@ -27,7 +27,6 @@ impl GamePiece {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq)]
-
 pub struct Coordinate(pub usize, pub usize);
 
 impl Coordinate {
